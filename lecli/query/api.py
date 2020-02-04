@@ -291,20 +291,31 @@ def prettyprint_statistics(response):
     # Handle timeseries
     if len(data['statistics']['timeseries']) != 0:
         # Extract keys
-        stats_key = data['statistics']['stats'].keys()[0]
-        stats_calc_value = data['statistics']['stats'].get(stats_key).values()
+        stats_key = list(data['statistics']['stats'].keys())[0]
+
+        print("=========================================")
+        print(stats_key)
+        print("=========================================")
+
+        stats_calc_value = list(data['statistics']['stats'].get(stats_key).values())
+
+        print("=========================================")
+        print(stats_calc_value)
+        print("=========================================")
+
+
         total = stats_calc_value[0] if len(stats_calc_value) != 0 else 0
         click.echo('Total: %s' % total)
 
         click.echo('Timeseries: ')
-        timeseries_key = data['statistics']['timeseries'].keys()[0]
+        timeseries_key = list(data['statistics']['timeseries'].keys())[0]
         time_range = time_to - time_from
         num_timeseries_values = len(data['statistics']['timeseries'].get(timeseries_key))
         for index, value in enumerate(data['statistics']['timeseries'].get(timeseries_key)):
             timestamp = (time_from + (time_range / num_timeseries_values) * (index + 1)) / 1000
             time_value = datetime.datetime.fromtimestamp(timestamp)
             human_ts = time_value.strftime('%Y-%m-%d %H:%M:%S')
-            click.echo(human_ts + ': ' + str(value.values()[0]))
+            click.echo(human_ts + ': ' + str(list(value.values())[0]))
 
     # Handle Groups
     elif len(data['statistics']['groups']) != 0:
