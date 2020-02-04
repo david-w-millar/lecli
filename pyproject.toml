@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "lecli"
+version = "0.1.0"
+description = "logentries cli"
+authors = ["dwm"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+click = "^7.0"
+requests = "^2.22"
+pytz = "^2019.3"
+termcolor = "^1.1"
+tabulate = "^0.8.6"
+appdirs = "^1.4"
+validators = "^0.14.2"
+httpretty = "^0.9.7"
+
+[tool.poetry.dev-dependencies]
+mock = "^3.0"
+httpretty = "^0.9.7"
+pytest = "^5.3"
+pytest-cov = "^2.8"
+click = "^7.0"
+requests = "^2.22"
+pytx = "^0.5.10"
+termcolor = "^1.1"
+tabulate = "^0.8.6"
+appdirs = "^1.4"
+pylint = "^2.4"
+validators = "^0.14.2"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
