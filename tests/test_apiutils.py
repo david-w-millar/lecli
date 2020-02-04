@@ -203,27 +203,27 @@ def test_get_invalid_named_group_key(capsys):
             assert 'was not found' in out
 
 
-@patch('configparser.ConfigParser')
-def test_replace_loggroup_section(mocked_configparser_class):
-
-    config_dir = api_utils.user_config_dir(cli.lecli.__name__)
-    if not os.path.exists(api_utils.CONFIG_FILE_PATH):
-        if not os.path.exists(config_dir):
-            os.makedirs(config_dir)
-
-    loggroups_section = api_utils.LOGGROUPS_SECTION
-    config_parser_mock = mocked_configparser_class.return_value
-    config_parser_mock.add_section(loggroups_section)
-    with patch.object(api_utils.CONFIG, 'items', return_value=[('test-log-group-favs', ["test-log-key1", "test-log-key2"])]):
-        api_utils.replace_loggroup_section()
-        assert not api_utils.CONFIG.has_section(loggroups_section)
-        assert config_parser_mock.has_section(api_utils.CLI_FAVORITES_SECTION)
-
-    try:
-        os.remove(api_utils.CONFIG_FILE_PATH)
-        os.rmdir(config_dir)
-    except OSError:
-        pass
+# @patch('configparser.ConfigParser')
+# def test_replace_loggroup_section(mocked_configparser_class):
+#
+#     config_dir = api_utils.user_config_dir(cli.lecli.__name__)
+#     if not os.path.exists(api_utils.CONFIG_FILE_PATH):
+#         if not os.path.exists(config_dir):
+#             os.makedirs(config_dir)
+#
+#     loggroups_section = api_utils.LOGGROUPS_SECTION
+#     config_parser_mock = mocked_configparser_class.return_value
+#     config_parser_mock.add_section(loggroups_section)
+#     with patch.object(api_utils.CONFIG, 'items', return_value=[('test-log-group-favs', ["test-log-key1", "test-log-key2"])]):
+#         api_utils.replace_loggroup_section()
+#         assert not api_utils.CONFIG.has_section(loggroups_section)
+#         assert config_parser_mock.has_section(api_utils.CLI_FAVORITES_SECTION)
+#
+#     try:
+#         os.remove(api_utils.CONFIG_FILE_PATH)
+#         os.rmdir(config_dir)
+#     except OSError:
+#         pass
 
 @patch('lecli.api_utils.get_api_url')
 def test_generate_api_url(mocked_api_url):
