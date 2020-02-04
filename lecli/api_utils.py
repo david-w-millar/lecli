@@ -332,12 +332,12 @@ def combine_objects(left, right):
     """
     if isinstance(left, dict) and isinstance(right, dict):
         result = {}
-        for key, value in left.iteritems():
+        for key, value in iter(left.items()):
             if key not in right:
                 result[key] = value
             else:
                 result[key] = combine_objects(value, right[key])
-        for key, value in right.iteritems():
+        for key, value in iter(right.items()):
             if key not in left:
                 result[key] = value
         return result
