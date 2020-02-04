@@ -292,21 +292,9 @@ def prettyprint_statistics(response):
     if len(data['statistics']['timeseries']) != 0:
         # Extract keys
         stats_key = list(data['statistics']['stats'].keys())[0]
-
-        print("=========================================")
-        print(stats_key)
-        print("=========================================")
-
         stats_calc_value = list(data['statistics']['stats'].get(stats_key).values())
-
-        print("=========================================")
-        print(stats_calc_value)
-        print("=========================================")
-
-
         total = stats_calc_value[0] if len(stats_calc_value) != 0 else 0
         click.echo('Total: %s' % total)
-
         click.echo('Timeseries: ')
         timeseries_key = list(data['statistics']['timeseries'].keys())[0]
         time_range = time_to - time_from

@@ -106,20 +106,7 @@ def replace_loggroup_section():
     if not CONFIG.has_section(CLI_FAVORITES_SECTION):
         CONFIG.add_section(CLI_FAVORITES_SECTION)
 
-    print("::::::::::::::::::::::::::::::::::::: GROUP SIZE")
-    print(len(existing_groups))
-
     for group in existing_groups:
-        print("::::::::::::::::::::::::::::::::::::: GROUP")
-        print(group)
-        print(type(group))
-        print(CLI_FAVORITES_SECTION)
-        print(type(CLI_FAVORITES_SECTION))
-        print(group[0])
-        print(type(group[0]))
-        print(group[1])
-        print(type(group[1]))
-        print(":::::::::::::::::::::::::::::::::::::")
         CONFIG.set(CLI_FAVORITES_SECTION, group[0], group[1])
 
     CONFIG.remove_section(LOGGROUPS_SECTION)
@@ -245,18 +232,12 @@ def generate_headers(api_key_type, method=None, action=None, body=None):
 
     if api_key_type is 'ro':
         api_key = str(get_ro_apikey())
-        # print("::::::: RO")
-        # print(api_key)
-        # print(type(api_key))
         headers = {
             'x-api-key': str(get_ro_apikey()),
             "Content-Type": "application/json"
         }
     elif api_key_type is 'rw':
         api_key = str(get_rw_apikey())
-        # print("::::::: RW")
-        # print(api_key)
-        # print(type(api_key))
         headers = {
             'x-api-key': api_key,
             "Content-Type": "application/json"
@@ -265,8 +246,6 @@ def generate_headers(api_key_type, method=None, action=None, body=None):
         date_h = datetime.datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S GMT")
         content_type_h = "application/json"
         signature = gensignature(get_owner_apikey(), date_h, content_type_h, method, action, body)
-        # print("::::::: OWNER")
-
         headers = {
             "Date": date_h,
             "Content-Type": content_type_h,
@@ -275,13 +254,7 @@ def generate_headers(api_key_type, method=None, action=None, body=None):
                 base64.b64encode(signature)
             )
         }
-
-    # print("::::::::::: Headers")
-    # print(headers)
-    # print(":::::::::::")
-
     headers['User-Agent'] = 'lecli'
-
     return headers
 
 
