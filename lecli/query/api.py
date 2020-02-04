@@ -309,9 +309,9 @@ def prettyprint_statistics(response):
     # Handle Groups
     elif len(data['statistics']['groups']) != 0:
         for group in data['statistics']['groups']:
-            for key, value in group.iteritems():
+            for key, value in iter(group.items()):
                 click.echo(str(key) + ':')
-                for innerkey, innervalue in value.iteritems():
+                for innerkey, innervalue in iter(value.items()):
                     click.echo('\t' + str(innerkey) + ': ' + str(innervalue))
 
     else:

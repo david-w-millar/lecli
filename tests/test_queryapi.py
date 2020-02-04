@@ -87,14 +87,13 @@ def test_prettyprint_statistics_groups(capsys):
         }
     }
 
-    httpretty.register_uri(httpretty.GET, MOCK_API_URL, content_type='application/json',
-                           body=json.dumps(sample_group_response))
+    httpretty.register_uri(httpretty.GET, MOCK_API_URL, content_type='application/json', body=json.dumps(sample_group_response))
     response = requests.get(MOCK_API_URL)
     api.prettyprint_statistics(response)
 
     out, err = capsys.readouterr()
     for group in response.json()['statistics']['groups']:
-        for key, value in group.iteritems():
+        for key, value in iter(group.items()):
             assert key in out
 
     teardown_httpretty()
