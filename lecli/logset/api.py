@@ -104,6 +104,13 @@ def rename_logset(logset_id, logset_name):
     """
     headers = api_utils.generate_headers('ro')
 
+    print("-------------------------------------------------")
+    print("-------------------------------------------------")
+    print("-------------------------------------------------")
+    print("-------------------------------------------------")
+    print("-------------------------------------------------")
+    print("-------------------------------------------------")
+
     try:
         response = requests.get(_url((logset_id,))[1], headers=headers)
         if response_utils.response_error(response):
